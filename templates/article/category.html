@@ -1,0 +1,19 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% load staticfiles %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+栏目
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+<div class="col-4 m-auto">
+<ul class="list-group">
+{% for category in categories %}
+<li class="list-group-item"><a href="{% url 'article:sort_by_category' category.title %}">{{ category.title }}</a>
+{% endfor %}
+</ul>
+</div>
+{% endblock content %}
