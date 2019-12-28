@@ -128,7 +128,8 @@ def article_create(request):
             # 新增的代码
             if request.POST['category'] != 'none':
                 new_article.category = category.objects.get(id=request.POST['category'])
-
+            if 'pic' in request.FILES:
+                new_article.pic = request.POST['pic']
             new_article.save()
             # 完成后返回到文章列表
             return redirect("article:article_list")
@@ -175,10 +176,11 @@ def article_update(request, id):
         return HttpResponse("抱歉，你无权修改这篇文章。")
     if request.method == "POST":
         # 将提交的数据赋值到表单实例中
-        article_post_form = ArticlePostForm(data=request.POST)
+        article_post_form = ArticlePostForm(request.POST,request.FILES)
         # 判断提交的数据是否满足模型的要求
         if article_post_form.is_valid():
             # 保存新写入的 title、body 数据并保存
+            article_cd = article_post_form.cleaned_data
             article.title = request.POST['title']
             article.body = request.POST['body']
             # 新增的代码
@@ -186,6 +188,10 @@ def article_update(request, id):
                 article.category = category.objects.get(id=request.POST['category'])
             else:
                 article.category = None
+            if 'pic' in request.FILES:
+                print(request.FILES)
+                article.pic = article_cd['pic']
+
             article.save()
             # 完成后返回到修改后的文章中。需传入文章的 id 值
             return redirect("article:article_detail", id=id)

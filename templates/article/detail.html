@@ -43,18 +43,6 @@
                     编辑文章
                 </a>
             </div>
-            <!--<div class="col-12 alert alert-success">
-                <div>作者：{{ article.author.username }}
-                    {% if user.is_superuser == 1 %}
-                    · <a href="#" onclick="confirm_delete()">删除文章</a>
-                    ·<a href="{% url 'article:article_update' article.id %}">编辑文章</a>
-                    {% endif %}
-                </div>
-                <div>
-                    浏览：{{ article.total_views }}
-                </div>
-
-            </div>-->
             <hr>
             <!-- 文章正文 -->
             <div class="col-12">
@@ -107,7 +95,7 @@
             </div>-->
         </div>
         <!-- 新增的目录 -->
-        <div class="col-3 mt-4">
+        <div class="col-3 card d-none d-lg-block mt-4">
             <h4><strong>目录</strong></h4>
             <hr>
             <div>
